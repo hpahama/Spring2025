@@ -61,7 +61,6 @@
         section p {
             font-family: "Courier New", Courier, monospace;
             font-size: 15px;
-            color:; /* Dark red for text */
             line-height: 1.6;
             text-align: justify;
             padding-right: 20px;
@@ -102,10 +101,14 @@
             font-family: monospace;
         }
 
-        /* No need for dark mode toggle styles, directly apply dark mode */
-        .dark-mode-text {
-            color: #00F7F4; /* Light cyan text */
+        /* Assignment link styles */
+        .assignment-links {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 15px;
+            color: #e8bc42; /* Matches the color of "Assignments:" */
+            text-decoration: none;
         }
+
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
 </head>
@@ -149,6 +152,15 @@
                 <strong>My Data505 Repository</strong>
             </a>
         </p>
+        <p>
+            Assignments:
+            <ul>
+                <li><a href="Data505/Ass1.html" class="assignment-links">Wines of the PNW</a></li>
+                <li><a href="Data505/Ass2.html" class="assignment-links">Wines Features</a></li>
+                <li><a href="Data505/Ass3.html" class="assignment-links">KNN</a></li>
+                <li><a href="Data505/Ass4.html" class="assignment-links">Conditional Probability</a></li>
+            </ul>
+        </p>
 
         <h2>✦CS276</h2>
         <p>
@@ -164,70 +176,5 @@
         <p>With this course, I am eager to deepen my understanding of ethical considerations in data science and refine my collaborative skills. Additionally, I seek to enhance my knowledge of data analytics and strengthen my writing abilities that I may apply in my professional endeavors.</p>
         <p>Through this course, I anticipate gaining insights into navigating ethical dilemmas in data-driven decision-making and honing my capacity to work effectively within interdisciplinary teams. By focusing on both ethical frameworks and communication skills, I aim to emerge equipped to contribute meaningfully to data-driven projects while articulating insights with clarity and precision.</p>
     </section>
-
-    <script>
-        const characters = ['⋆', '₊', '°', '⊹', '★','⭐', '🪐', '࣭', '⭑', '⋆', '｡', '⊹', '࣪'];
-        const maxCharacters = 200; // Limit the number of falling characters
-
-        function randomPosition(maxX) {
-            return Math.floor(Math.random() * maxX);
-        }
-
-        function randomRotation() {
-            return Math.random() * 4 + 1;
-        }
-
-        function randomSize() {
-            return Math.floor(Math.random() * 20) + 10;
-        }
-
-        function randomOpacity() {
-            return Math.random() * 0.5 + 0.5;
-        }
-
-        function createCharacter() {
-            const character = document.createElement('div');
-            character.classList.add('falling-character');
-            character.textContent = characters[Math.floor(Math.random() * characters.length)];
-            const positionX = randomPosition(window.innerWidth);
-            const positionY = -50;
-            const size = randomSize();
-            character.style.left = positionX + 'px';
-            character.style.top = positionY + 'px';
-            character.style.fontSize = size + 'px';
-            character.style.opacity = randomOpacity();
-            character.rotation = randomRotation();
-            return character;
-        }
-
-        function animateCharacter(character) {
-            const fall = setInterval(() => {
-                const currentTop = parseFloat(character.style.top);
-                if (currentTop >= window.innerHeight) {
-                    clearInterval(fall);
-                    character.remove();
-                    const newCharacter = createCharacter();
-                    document.querySelector('.matrix-container').appendChild(newCharacter);
-                    animateCharacter(newCharacter);
-                } else {
-                    character.style.top = (currentTop + 2) + 'px';
-                    character.style.transform = `rotate(${parseFloat(character.style.transform ? character.style.transform.replace('rotate(', '').replace('deg)', '') : 0) + character.rotation}deg)`;
-                }
-            }, 40);
-        }
-
-        function startMatrix() {
-            setInterval(() => {
-                const existingCharacters = document.querySelectorAll('.falling-character');
-                if (existingCharacters.length < maxCharacters) {
-                    const character = createCharacter();
-                    document.querySelector('.matrix-container').appendChild(character);
-                    animateCharacter(character);
-                }
-            }, 100);
-        }
-
-        window.onload = startMatrix;
-    </script>
 </body>
 </html>
